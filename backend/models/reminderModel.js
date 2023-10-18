@@ -11,6 +11,8 @@ const reminderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isReminded: Boolean,
+  remindAt: String,
   description: String,
   dosage: String,
   frequency: String, // You can customize this field (e.g., daily, weekly, etc.)
