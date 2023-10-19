@@ -2,21 +2,28 @@ const mongoose = require('mongoose');
 
 // Define a schema for the Reminders model
 const reminderSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Reference to the User model for associating reminders with users
-    required: true,
-  },
+
   medicationName: {
     type: String,
     required: true,
   },
   isReminded: Boolean,
-  remindAt: String,
-  description: String,
-  dosage: String,
-  frequency: String, // You can customize this field (e.g., daily, weekly, etc.)
-  time: Date, // Store the time as a Date object for scheduling reminders
+  remindAt: {
+    type: Number,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: false,
+  },
+  userId: {
+    type: mongoose.Schema.ObjectId,
+      ref: 'User', // Reference to the User model for associating reminders with users
+      required: true,
+    },
+  // dosage: String,
+  // frequency: String, // You can customize this field (e.g., daily, weekly, etc.)
+  // time: Date.now, // Store the time as a Date object for scheduling reminders
   // Add more fields as needed for your Reminders model
   // Example: notification preferences (email, SMS, etc.)
 });
