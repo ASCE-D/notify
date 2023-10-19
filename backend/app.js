@@ -30,8 +30,9 @@ app.use(fileUpload());
 // Route Imports
 
 const user = require("./routes/userRoute");
+const reminder = require("./routes/reminderRoute");
 
-// app.use("/api/v1", product);
+app.use("/api/v1", reminder);
 app.use("/api/v1", user);
 
 
