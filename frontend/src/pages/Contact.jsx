@@ -1,14 +1,16 @@
 import React from 'react';
+import '../styles/contact.css'
 
 const Contact = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-green-300 rounded-lg p-7 ">
+      <div className="bg-green-300 rounded-lg p-7 contact-box">
         <div className="md:flex ">
-          <div className="md:w-full  p-4">
+          <div className="md:w-full  p-6">
             <h2 className="text-4xl md:text-4xl text-center mb-4 text-gray-800 font-bold">
               Contact Information
             </h2>
+            <br />
 
             <p className="mb-2 text-md">
               <strong>Email:</strong>{' '}
@@ -16,7 +18,7 @@ const Contact = () => {
                 href="mailto:ashishpandey46209@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
+                className=" hover:underline"
               >
                 ashishpandey46209@gmail.com
               </a>
@@ -27,7 +29,7 @@ const Contact = () => {
                 href="https://www.linkedin.com/in/ash1sh-pandey"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
+                className=" hover:underline"
               >
                 LinkedIn profile
               </a>
@@ -38,7 +40,7 @@ const Contact = () => {
                 href="https://www.instagram.com/gamersenpai69/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
+                className=" hover:underline"
               >
                 Instagram profile
               </a>
@@ -49,7 +51,7 @@ const Contact = () => {
                 href="https://twitter.com/Ashishp7774"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
+                className=" hover:underline"
               >
                 Twitter profile
               </a>
