@@ -48,7 +48,6 @@ const SignUp = () => {
                 
               <p className='text-right'> {/* Align the link to the right */}
               Have an account? 
-              
             </p>
               </label>
               <a
@@ -58,7 +57,6 @@ const SignUp = () => {
                 Login to Your Account
               </a>
             </div>
-            
             <br />
             <div className="text-center">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-5/6">
