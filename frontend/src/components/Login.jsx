@@ -2,11 +2,11 @@ import React from "react";
 
 const Login = () => {
   return (
-    <div className="bg-gradient-to-br from-green-100 to-brown-700 min-h-screen flex items-center justify-center">
+    <div className=" min-h-screen flex items-center justify-center">
       <div className="bg-green-300 rounded-lg shadow-lg p-6 w-5/6 md:w-3/4 lg:w-2/3 xl:w-1/2">
         <div className="md:flex">
           <div className="md:w-1/2 p-6">
-            <h1 className="text-6xl font-bold text-green mb-4">Reminder</h1>
+            <h1 className="text-6xl font-bold text-green mb-4">Notify</h1>
             <br />
             <p className="text-white">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Crabitur

@@ -37,6 +37,11 @@ nav.shadow{
     background-color: rgb(170, 214, 170);
 }
 
+
+.shadow-space{
+    height: 3rem;
+    
+}
 .mobile-menu-close,.mobile-menu-open{
     display: none;
 }
