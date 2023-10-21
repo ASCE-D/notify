@@ -9,7 +9,7 @@ import {
 const Home = () => {
   return (
     <>
-      <div className="intrdoction md:w-3/5 p-8 text-center mx-auto">
+      <div className="intrdoction  md:w-4/5 lg:w-3/5 p-8 text-center mx-auto">
         <br />
         <br />
         <h1 className="text-4xl md:text-5xl text-gray-800 font-bold mb-4">
@@ -38,7 +38,7 @@ const Home = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="max-w-screen-xl mx-auto p-4">
           <div className="md:flex justify-center">
-            <div className="text-center md:w-1/2 md:p-4 mb-4">
+            <div className="md:mr-7 text-center md:w-1/2 md:p-4 mb-4">
               <h1 className="text-4xl md:text-5xl text-gray-800 font-bold">
                 Did you know?
               </h1>{" "}
@@ -55,7 +55,7 @@ const Home = () => {
               </p>
             </div>
             <br /><br /><br />
-            <div className="bg-green-300 rounded-lg p-7 shadow-md w-full md:w-1/2 mb-4">
+            <div className=" md:ml-7 bg-green-300 rounded-lg p-7 shadow-md w-full md:w-1/2 mb-4">
               <h2 className="text-3xl md:text-4xl text-center text-gray-800 font-bold">
                 Set a Reminder
               </h2>

@@ -1,6 +1,7 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { GiHamburgerMenu, GiCrossMark } from "react-icons/gi";
+import { motion, AnimatePresence } from "framer-motion";
 import "../styles/navbar.css";
 
 const Navbar = () => {
@@ -22,6 +23,19 @@ const Navbar = () => {
     };
   }, []);
 
+  const menuVariants = {
+    hidden: {
+      opacity: 0,
+      y: -20,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
 
   return (
     <>
@@ -35,9 +49,7 @@ const Navbar = () => {
 
           <div className="menu-link">
             <NavLink to="/">Home</NavLink>
-
             <NavLink to="/reminders">Reminders</NavLink>
-
             <NavLink to="/contact">Contact</NavLink>
           </div>
 
@@ -49,11 +61,21 @@ const Navbar = () => {
         </nav>
 
         <div className={showMenu ? "mobile-menu-open" : "mobile-menu-close"}>
-          <NavLink to="/">Home</NavLink>
-
-          <NavLink to="/reminders">Reminders</NavLink>
-
-          <NavLink to="/contact">Contact</NavLink>
+          <AnimatePresence>
+            {showMenu && (
+              <motion.div
+                className="dropdown-menu"
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={menuVariants}
+              >
+                <NavLink to="/">Home</NavLink>
+                <NavLink to="/reminders">Reminders</NavLink>
+                <NavLink to="/contact">Contact</NavLink>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
