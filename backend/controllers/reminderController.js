@@ -1,34 +1,299 @@
-const schedule = require('node-schedule');
-const ErrorHander = require("../utils/errorhander");
-const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const reminder = require("../models/reminderModel")
-const sendEmail = require("../utils/sendEmail");
+// const schedule = require('node-schedule');
+// const ErrorHander = require("../utils/errorhander");
+// const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+// const Reminder = require('../models/reminderModel');
+// const sendEmail = require("../utils/sendEmail");
+// const User = require('../models/userModel'); // Import your User model
+// const EventEmitter = require('events');
+// const eventEmitter = new EventEmitter();
 
-// exports.setreminder = catchAsyncErrors(async (req, res, next) => {
+// // exports.setreminder = catchAsyncErrors(async (req, res, next) => {
+// //   try {
+// //     const {medicationName, remindhr, remindmin  } = req.body;
+// //     console.log(req.user)
+// //     await reminder.create({
+// //       medicationName,
+// //       remindAt,
+// //       userId: req.user._id,
+// //       isReminded: false
+// //     });
+
+// //     res.status(201).json({
+// //       success: true,
+// //       message: "Task added Successfully",
+// //     });
+// //   } catch (error) {
+// //     next(error);
+// //   }
+// // });
+
+// exports.createReminder = async (req, res, next) => {
 //   try {
-//     const { medicationName, remindAt } = req.body;
-//     console.log(req.user)
-//     await reminder.create({
+//     // Get reminder details from the request body
+//     const {
 //       medicationName,
-//       remindAt,
-//       userId: req.user._id,
-//       isReminded: false
+//       remindhr,
+//       remindmin,
+//       description,
+      
+//       email,
+//       whatsapp,
+//       sms,
+//       call,
+//     } = req.body;
+
+//     // Create a new reminder document
+//     const newReminder = await Reminder.create({
+//       medicationName,
+//       remindhr,
+//       remindmin,
+//       description,
+//       userId: req.user._id, // Assuming you have the user's ID from the request
+//       email,
+//       whatsapp,
+//       sms,
+//       call,
 //     });
 
 //     res.status(201).json({
 //       success: true,
-//       message: "Task added Successfully",
+//       message: 'Reminder created successfully',
+//       reminder: newReminder,
+//     });
+ 
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+// exports.reminderlist = async (req, res, next) => {
+//   try {
+//     const userId = req.user._id;
+
+//     const tasks = await Reminder.find({ user: userId });
+
+//     res.status(200).json({
+//       success: true,
+//       tasks,
 //     });
 //   } catch (error) {
 //     next(error);
 //   }
-// });
+// };
 
+// exports.deletereminder = async (req, res, next) => {
+//   try {
+//     const task = await Reminder.findById(req.params.id);
+
+//     if (!task) return next(new ErrorHander("Task not found", 404));
+//     await task.deleteOne();
+
+//     res.status(200).json({
+//       message: "Task Deleted!",
+//       success: true,
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+
+
+// // exports.remindermail = catchAsyncErrors(async (req, res, next) => {
+// //   const user = await User.findOne({ email: req.body.email });
+
+// //   if (!user) {
+// //     return next(new ErrorHander("User not found", 404));
+// //   }
+
+// //   // Get ResetPassword Token
+// //   const resetToken = user.getResetPasswordToken();
+
+// //   await user.save({ validateBeforeSave: false });
+
+// //   const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
+
+// //   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+
+// //   try {
+// //     await sendEmail({
+// //       email: user.email,
+// //       subject: `Ecommerce Password Recovery`,
+// //       message,
+// //     });
+
+// //     res.status(200).json({
+// //       success: true,
+// //       message: `Email sent to ${user.email} successfully`,
+// //     });
+// //   } catch (error) {
+// //     user.resetPasswordToken = undefined;
+// //     user.resetPasswordExpire = undefined;
+
+// //     await user.save({ validateBeforeSave: false });
+
+// //     return next(new ErrorHander(error.message, 500));
+// //   }
+// // });
+
+// // exports.setreminder = catchAsyncErrors(async (req, res, next) => {
+// //   try {
+// //     const { medicationName, remindhr, remindmin } = req.body;
+// //     const user = req.user;
+// //     "2015-03-25T12:00:00Z+5:30"
+
+// //     if (!user) {
+// //       return next(new ErrorHander("Please log in to access this resource", 404));
+// //     }
+// //     const message = `Hello ${user.name},\n\nIt's time to take your medication: ${medicationName}.`;
+// //     // Schedule the job
+// //     schedule.scheduleJob(`${remindmin} ${remindhr} * * *`, async () => {
+// //       try {
+// //         console.log(`Email sent to ${user.email} successfully`);
+// //         await sendEmail({
+// //           email: user.email,
+// //           subject: `Medication Reminder`,
+// //           message,
+// //         });
+
+        
+// //         res.status(201).json({
+// //           success: true,
+// //           message: "I ran"
+// //         })
+// //       } catch (error) {
+// //         console.error('Error sending email notification:', error);
+// //       }
+// //     });
+// //   } catch (error) {
+
+// //   }
+// // });
+
+
+
+
+// // Function to send email notifications
+// const sendEmailNotifications = async (reminder) => {
+//   try {
+//     // Get user details associated with the reminder
+//     const user = await User.findById(reminder.userId);
+
+//     if (!user) {
+//       // Handle the case where the user associated with the reminder is not found
+//       return;
+//     }
+
+//     const message = `Hello ${user.name},\n\nIt's time to take your medication: ${reminder.medicationName}.`;
+
+//     // Send the email using the sendEmail function
+//     await sendEmail({
+//       email: user.email,
+//       subject: 'Medication Reminder',
+//       message,
+//     });
+
+//     // Optionally, update the reminder as "reminded" if needed
+//     reminder.isReminded = true;
+//     await reminder.save();
+//   } catch (error) {
+//     console.error('Error sending email notification:', error);
+//   }
+// };
+
+// // Controller to schedule and send email notifications for reminders
+// exports.scheduleEmailNotificationsController = async (req, res, next) => {
+//   try {
+//     // Retrieve reminders that need email notifications
+//     const reminders = await Reminder.find({
+//       email: true, // Filter for reminders with email notifications enabled
+//       isReminded: false, // Filter for reminders that have not been reminded yet
+//     });
+
+//     // Schedule email notifications for each reminder
+//     for (const reminder of reminders) {
+//       const { remindhr, remindmin } = reminder;
+//       // Schedule the job
+//       schedule.scheduleJob(`${remindmin} ${remindhr} * * *`, async () => {
+//         await sendEmailNotifications(reminder);
+//       });
+//     }
+
+//     res.status(200).json({
+//       success: true,
+//       message: 'Scheduled email notifications successfully',
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+
+
+
+const schedule = require('node-schedule');
+const ErrorHander = require('../utils/errorhander');
+const Reminder = require('../models/reminderModel');
+const sendEmail = require('../utils/sendEmail');
+const User = require('../models/userModel'); // Import your User model
+const EventEmitter = require('events');
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on('reminderCreated', async (reminder) => {
+  try {
+    // Schedule email notifications for the new reminder
+    await scheduleEmailNotificationsController(reminder);
+  } catch (error) {
+    console.error('Error scheduling email notifications:', error);
+  }
+});
+
+exports.createReminder = async (req, res) => {
+  try {
+    // Get reminder details from the request body
+    const {
+      medicationName,
+      remindhr,
+      remindmin,
+      description,
+      email,
+      whatsapp,
+      sms,
+      call,
+    } = req.body;
+
+    // Create a new reminder document
+    const newReminder = await Reminder.create({
+      medicationName,
+      remindhr,
+      remindmin,
+      description,
+      userId: req.user._id, // Assuming you have the user's ID from the request
+      email,
+      whatsapp,
+      sms,
+      call,
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'Reminder created successfully',
+      reminder: newReminder,
+    });
+    eventEmitter.emit('reminderCreated', newReminder);
+  } catch (error) {
+    console.error('Error creating reminder:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error creating reminder',
+    });
+  }
+};
 exports.reminderlist = async (req, res, next) => {
   try {
     const userId = req.user._id;
 
-    const tasks = await reminder.find({ user: userId });
+    const tasks = await Reminder.find({ user: userId });
 
     res.status(200).json({
       success: true,
@@ -38,10 +303,9 @@ exports.reminderlist = async (req, res, next) => {
     next(error);
   }
 };
-
 exports.deletereminder = async (req, res, next) => {
   try {
-    const task = await reminder.findById(req.params.id);
+    const task = await Reminder.findById(req.params.id);
 
     if (!task) return next(new ErrorHander("Task not found", 404));
     await task.deleteOne();
@@ -55,78 +319,54 @@ exports.deletereminder = async (req, res, next) => {
   }
 };
 
-
-
-// exports.remindermail = catchAsyncErrors(async (req, res, next) => {
-//   const user = await User.findOne({ email: req.body.email });
-
-//   if (!user) {
-//     return next(new ErrorHander("User not found", 404));
-//   }
-
-//   // Get ResetPassword Token
-//   const resetToken = user.getResetPasswordToken();
-
-//   await user.save({ validateBeforeSave: false });
-
-//   const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
-
-//   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
-
-//   try {
-//     await sendEmail({
-//       email: user.email,
-//       subject: `Ecommerce Password Recovery`,
-//       message,
-//     });
-
-//     res.status(200).json({
-//       success: true,
-//       message: `Email sent to ${user.email} successfully`,
-//     });
-//   } catch (error) {
-//     user.resetPasswordToken = undefined;
-//     user.resetPasswordExpire = undefined;
-
-//     await user.save({ validateBeforeSave: false });
-
-//     return next(new ErrorHander(error.message, 500));
-//   }
-// });
-
-exports.setreminder = catchAsyncErrors(async (req, res, next) => {
+// Function to send email notifications
+const sendEmailNotifications = async (reminder) => {
   try {
-    const { medicationName, remindAt } = req.body;
-    const user = req.user;
-    "2015-03-25T12:00:00Z+5:30"
+    // Get user details associated with the reminder
+    const user = await User.findById(reminder.userId);
 
     if (!user) {
-      return next(new ErrorHander("Please log in to access this resource", 404));
+      // Handle the case where the user associated with the reminder is not found
+      return;
     }
-    const message = `Hello ${user.name},\n\nIt's time to take your medication: ${medicationName}.`;
-    // Schedule the job
-    schedule.scheduleJob(`*/1 13  * *`, async () => {
-      try {
-        console.log(`Email sent to ${user.email} successfully`);
-        await sendEmail({
-          email: user.email,
-          subject: `Medication Reminder`,
-          message,
-        });
 
-        
-        res.status(201).json({
-          success: true,
-          message: "I ran"
-        })
-      } catch (error) {
-        console.error('Error sending email notification:', error);
-      }
+    const message = `Hello ${user.name},\n\nIt's time to take your medication: ${reminder.medicationName}.`;
+
+    // Send the email using the sendEmail function
+    await sendEmail({
+      email: user.email,
+      subject: 'Medication Reminder',
+      message,
     });
+
+    // Optionally, update the reminder as "reminded" if needed
+    reminder.isReminded = true;
+    await reminder.save();
   } catch (error) {
-
+    console.error('Error sending email notification:', error);
   }
-});
+};
 
+const scheduleEmailNotificationsController = async () => {
+  try {
+    // Retrieve reminders that need email notifications
+    const reminders = await Reminder.find({
+      email: true, // Filter for reminders with email notifications enabled
+      isReminded: false, // Filter for reminders that have not been reminded yet
+    });
 
+    // Schedule email notifications for each reminder
+    for (const reminder of reminders) {
+      const { remindhr, remindmin } = reminder;
+      // Schedule the job
+      schedule.scheduleJob(`${remindmin} ${remindhr} * * *`, async () => {
+        await sendEmailNotifications(reminder);
+      });
+    }
+  } catch (error) {
+    console.error('Error scheduling email notifications:', error);
+  }
+};
+
+exports.scheduleEmailNotificationsController = scheduleEmailNotificationsController;
 

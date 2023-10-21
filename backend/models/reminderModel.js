@@ -7,8 +7,17 @@ const reminderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  isReminded: Boolean,
-  remindAt: {
+  
+  isReminded: {
+    type: Boolean,
+    default:false,
+    
+  },
+  remindhr: {
+    type: Number,
+    required: true,
+  },
+  remindmin: {
     type: Number,
     required: true,
   },
@@ -21,6 +30,27 @@ const reminderSchema = new mongoose.Schema({
       ref: 'User', // Reference to the User model for associating reminders with users
       required: true,
     },
+    email: {
+      type: Boolean,
+      default:false,
+      
+    },
+    whatsapp: {
+      type: Boolean,
+      default:false,
+      
+    },
+    sms: {
+      type: Boolean,
+      default:false,
+      
+    },
+    call: {
+      type: Boolean,
+      default:false,
+      
+    },
+    
   // dosage: String,
   // frequency: String, // You can customize this field (e.g., daily, weekly, etc.)
   // time: Date.now, // Store the time as a Date object for scheduling reminders
