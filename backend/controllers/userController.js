@@ -88,14 +88,15 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
-
+  // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/users/password/reset/${resetToken}`;
+  const resetPasswordUrl = `http://localhost:5173/reset/${resetToken}`; //manually type the frontend protocol and host name 
+  
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
 
   try {
     await sendEmail({
       email: user.email,
-      subject: `Ecommerce Password Recovery`,
+      subject: `Notify Password Recovery`,
       message,
     });
 
@@ -145,7 +146,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
   await user.save();
 
-  sendToken(user, 200, res);
+  sendToken(user, "Password Reset Done" ,200, res);
 });
 
 // Get User Detail

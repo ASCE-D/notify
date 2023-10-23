@@ -10,9 +10,11 @@ import axios from "axios";
 import { Context, server } from "./main";
 import { Toaster } from "react-hot-toast";
 import { useContext, useEffect } from "react";
+import Forgot from "./components/Forgot.jsx";
+import Reset from "./components/Reset.jsx";
 
 function App() {
-  const { setUser, setIsAuthenticated, setLoading , isAuthenticated } = useContext(Context);
+  const { setIsAuthenticated, setLoading , isAuthenticated } = useContext(Context);
 
   useEffect(() => {
     setLoading(true);
@@ -21,21 +23,21 @@ function App() {
         withCredentials: true,
       })
       .then((res) => {
-        setUser(res.data.user);
+        // setUser(res.data.user);
         setIsAuthenticated(true);
         setLoading(false);
       })
       .catch((error) => {
         if (error.response.status === 401) {
-          null; 
+          console.error("Unauthorized"); 
         } else {
           console.error(error); // Log other errors
         }
-        setUser({});
+        // setUser({});
         setIsAuthenticated(false);
         setLoading(false);
       });
-  }, []);
+  }, [setIsAuthenticated, setLoading]);
   return (
     <>
       <Router>
@@ -43,6 +45,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path="/login" element={<Login />} /> 
+          <Route path="/forgot" element={<Forgot />} /> 
+          <Route path="/reset/:token" element={<Reset />} /> 
           <Route path="/signup" element={<SignUp />} /> 
           <Route path='/contact' element={<Contact />} />
           <Route path="/reminders" element={<Reminders />} />
