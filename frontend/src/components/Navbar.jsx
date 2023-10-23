@@ -73,11 +73,11 @@ const Navbar = () => {
             <NavLink to="/reminders">Reminders</NavLink>
             <NavLink to="/contact">Contact</NavLink>
             <button
-  onClick={() => logoutHandler()}
-  className="bg-transparent border border-green-800 hover:bg-green-500 hover:text-grey text-grey-100 font-semibold py-1 px-3 rounded-full shadow-xl"
->
-  Logout
-</button>
+              onClick={() => logoutHandler()}
+              className="bg-transparent border border-green-800 hover:bg-green-500 hover:text-grey text-grey-100 font-semibold py-1 px-3 rounded-full shadow-xl"
+            >
+              Logout
+            </button>
           </div>
 
           <div className="hamburger-menu">
@@ -112,7 +112,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="shadow-space"></div>
+      
     </>
   );
 };

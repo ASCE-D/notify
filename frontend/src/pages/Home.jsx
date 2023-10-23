@@ -9,6 +9,7 @@ import { Navigate } from "react-router-dom";
 import { Context, server } from "../main";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 const Home = () => {
   const [medicationName, setmedicationName] = useState("");
@@ -16,9 +17,8 @@ const Home = () => {
   const [remindmin, setremindmin] = useState(false);
   const [email, setEmail] = useState("false");
   // const [refresh, setRefresh] = useState("false");
-  const [loading, setLoading] = useState(false);
 
-  const { isAuthenticated } = useContext(Context);
+  const { isAuthenticated , loading , setLoading } = useContext(Context);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const Home = () => {
       console.log(medicationName, remindhr, remindmin, email);
       setLoading(true);
       const { data } = await axios.post(
-        `http://localhost:7000/api/v1/reminder/create`,
+        `${server}/reminder/create`,
         {
           medicationName,
           remindhr,
@@ -64,13 +64,16 @@ const Home = () => {
 
   if (!isAuthenticated) return <Navigate to={"/login"} />;
   return (
+    loading ? (
+      <Loading />
+    ) : (
     <>
       <div className="intrdoction  md:w-4/5 lg:w-3/5 p-8 text-center mx-auto">
         <br />
         <br />
         <h1 className="text-4xl md:text-5xl text-gray-800 font-bold mb-4">
           Welcome to Notify
-        </h1>
+        </h1> <br />
         <p className="text-lg text-gray-600 leading-7">
           At Notify, we believe that taking control of your health should be
           simple and stress-free. We understand that managing medications can be
@@ -107,7 +110,7 @@ const Home = () => {
                 percentage who had medication delays dropped from 85% to 18%.
                 Another study in 2019 found that patients using medication
                 reminder apps have better medication adherence after 3 months
-                than those who didn’t use these apps.
+                than those who didn't use these apps.
               </p>
             </div>
             <br />
@@ -205,7 +208,7 @@ const Home = () => {
                           />
                           <span className="ml-2 text-lg">
                             <BiLogoGmail className=" inline text-3xl text-gray-600" />{" "}
-                            mail
+                            Mail
                           </span>
                         </label>
                       </div>
@@ -214,7 +217,7 @@ const Home = () => {
                           <input type="checkbox" name="sms" />
                           <span className="ml-2 text-lg">
                             <BiMessage className=" inline text-3xl text-gray-600" />{" "}
-                            Short Message Service
+                            SMS
                           </span>
                         </label>
 
@@ -222,7 +225,7 @@ const Home = () => {
                           <input type="checkbox" name="phone" />
                           <span className="ml-2 text-lg">
                             <BiPhoneCall className=" inline text-3xl text-gray-600" />{" "}
-                            Phone Call
+                            Phone
                           </span>
                         </label>
                       </div>
@@ -245,7 +248,7 @@ const Home = () => {
         </div>
       </div>
     </>
-  );
+  ));
 };
 
 export default Home;
