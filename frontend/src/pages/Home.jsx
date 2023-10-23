@@ -16,10 +16,15 @@ const Home = () => {
   const [remindhr, setremindhr] = useState("");
   const [remindmin, setremindmin] = useState(false);
   const [email, setEmail] = useState("false");
+<<<<<<< HEAD
   const [whatsapp, setWhatsapp] = useState("false");
   // const [email, setEmail] = useState("false");
   // const [email, setEmail] = useState("false");
 
+=======
+  const [whatsapp, setwhatsapp] = useState("false");
+  // const [refresh, setRefresh] = useState("false");
+>>>>>>> 8dc9aad9dad74e50205c0d0df7e87d20e6061dab
 
   const { isAuthenticated , loading , setLoading } = useContext(Context);
 
@@ -66,8 +71,13 @@ const Home = () => {
   const handleEmailCheckboxChange = (e) => {
     setEmail(e.target.checked ? "true" : "false"); // Set email to "true" when checkbox is checked, empty string otherwise
   };
+<<<<<<< HEAD
   const handleWhatsappCheckboxChange = (e) => {
     setWhatsapp(e.target.checked ? "true" : "false"); 
+=======
+  const handlewhatsappCheckboxChange = (e) => {
+    setwhatsapp(e.target.checked ? "true" : "false"); // Set email to "true" when checkbox is checked, empty string otherwise
+>>>>>>> 8dc9aad9dad74e50205c0d0df7e87d20e6061dab
   };
 
   if (!isAuthenticated) return <Navigate to={"/login"} />;
@@ -202,8 +212,13 @@ const Home = () => {
                       <div className="flex items-center justify-between">
                         <label className="flex items-center ">
                           <input type="checkbox" name="whatsapp" 
+<<<<<<< HEAD
                           checked={whatsapp === "true"} // Bind the checked status of the checkbox to the email state
                           onChange={handleWhatsappCheckboxChange}/>
+=======
+                           checked={whatsapp === "true"} // Bind the checked status of the checkbox to the email state
+                           onChange={handlewhatsappCheckboxChange}/>
+>>>>>>> 8dc9aad9dad74e50205c0d0df7e87d20e6061dab
                           <span className="ml-2 text-lg">
                             <BiLogoWhatsapp className=" inline text-3xl text-gray-600" />
                             WhatsApp
