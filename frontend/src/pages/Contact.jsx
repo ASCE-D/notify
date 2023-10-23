@@ -1,7 +1,12 @@
-import React from 'react';
+import React , {useContext} from 'react';
 import '../styles/contact.css'
+import { Context} from '../main';
+
+import { Navigate } from 'react-router-dom';
 
 const Contact = () => {
+  const { isAuthenticated } = useContext(Context);
+  if (!isAuthenticated) return <Navigate to={"/login"} />;
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-green-300 rounded-lg p-7 contact-box">

@@ -2,7 +2,7 @@
   width: 100%;
   height: 6rem;
   display: grid;
-  grid-template-columns: 10rem 1fr 1fr 0.8fr 10rem;
+  grid-template-columns: 10rem 1fr 1fr 1.6fr 10rem;
   background-color: rgb(170, 214, 170);
 }
 nav.shadow {
@@ -46,7 +46,7 @@ nav.shadow {
 
 @media (max-width: 1200px) {
   .main-nav {
-    grid-template-columns: 10rem 1fr 0.5fr 1.2fr 10rem;
+    grid-template-columns: 10rem 1fr 0.5fr 1.8fr 10rem;
   }
 }
 
@@ -64,7 +64,7 @@ nav.shadow {
     font-size: large;
   }
   .mobile-menu-open {
-    height: 12rem;
+    height: 15rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

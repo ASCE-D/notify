@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState , useContext} from 'react'
 import axios from 'axios';
-import { server } from '../main';
+import { server , Context} from '../main';
+import toast from 'react-hot-toast';
+import { Navigate } from "react-router-dom";
+
+
 const Reminders = () => {
   const [reminders, setReminders] = useState([]);
-
+  const [refresh , setRefresh] = useState('true');
+  const { isAuthenticated } = useContext(Context);
   useEffect(() => {
     const fetchReminders = async () => {
       try {
@@ -18,19 +23,32 @@ const Reminders = () => {
         // Handle errors here if needed
       }
     };
-   
+  
     
     fetchReminders(); // Call the function to fetch reminders
     
-  }, []);
-
+  }, [refresh]);
+  const deleteReminder = async (id) => {
+    try {
+      const { data } = await axios.delete(`http://localhost:7000/api/v1/reminder/delete/${id}`, {
+        withCredentials: true,
+      });
+      console.log(data)
+      toast.success(data.message);
+      
+    } catch (error) {
+      toast.error(error.response.data.message);   
+    }
+    setRefresh((prev) => !prev);
+  };
+  if (!isAuthenticated) return <Navigate to={"/login"} />;
   return (
     <div>
     {reminders.map((reminder) => (
       // Render each reminder item here
-      <div key={reminder.id}>
+      <div key={reminder._id}>
         {reminder.medicationName}
-        <button>delete </button>
+        <button onClick={()=>deleteReminder(reminder._id)}>delete </button>
       </div>
      
     ))}

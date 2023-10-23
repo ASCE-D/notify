@@ -17,8 +17,9 @@ const SignUp = () => {
     setLoading(true);
     e.preventDefault();
     try {
+     
       const { data } = await axios.post(
-        `${server}/users/new`,
+        `${server}/users/register`,
         {
           name,
           email,
@@ -53,6 +54,7 @@ const SignUp = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Crabitur et est sed felis aliquet sollicitudin.
             </p>
           </div>
+         
           <div className="md:w-1/2 p-6">
             <h5 className="text-4xl text-center font-bold">Sign Up</h5>
             <br />
@@ -63,6 +65,7 @@ const SignUp = () => {
                 className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
                 placeholder="Username"
                 value={name}
+                required
                 onChange={e => setName(e.target.value)}
               />
             </div>
@@ -95,7 +98,7 @@ const SignUp = () => {
 
               />
             </div>
-            </form>
+           
           
             <div className="flex justify-between items-center mb-4">
               <label className="flex items-center space-x-2">
@@ -105,7 +108,7 @@ const SignUp = () => {
             </p>
               </label>
               <a
-                href="#"
+                href="/login"
                 className="underline decoration-sky-500 text-cyan-700"
               >
                 Login to Your Account
@@ -113,11 +116,12 @@ const SignUp = () => {
             </div>
             <br />
             <div className="text-center">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-5/6"  disabled={loading} type="submit" onClick={submitHandler}>
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-5/6"  disabled={loading} type="submit" >
                 Sign Up
               </button>
             </div>
             <br />
+            </form>
           </div>
         </div>
       </div>

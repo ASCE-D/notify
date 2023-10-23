@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.route("/create").post(isAuthenticatedUser, createReminder);
 
-router.route("/deletereminder").post(isAuthenticatedUser, deletereminder);
+router.route("/delete/:id").delete(isAuthenticatedUser, deletereminder);
 router.route("/schedule").post(isAuthenticatedUser, scheduleEmailNotificationsController);
 
 
