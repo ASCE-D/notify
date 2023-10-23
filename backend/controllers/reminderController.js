@@ -238,11 +238,13 @@ const sendEmail = require('../utils/sendEmail');
 const User = require('../models/userModel'); // Import your User model
 const EventEmitter = require('events');
 const eventEmitter = new EventEmitter();
+const sendWhatsapp = require('../utils/sendWhatsapp')
 
 eventEmitter.on('reminderCreated', async (reminder) => {
   try {
     // Schedule email notifications for the new reminder
     await scheduleEmailNotificationsController(reminder);
+    await scheduleWhatsappNotificationsController (reminder)
   } catch (error) {
     console.error('Error scheduling email notifications:', error);
   }
@@ -372,3 +374,51 @@ const scheduleEmailNotificationsController = async () => {
 
 exports.scheduleEmailNotificationsController = scheduleEmailNotificationsController;
 
+const sendWhatsappNotifications = async (reminder) => {
+  try {
+    // Get user details associated with the reminder
+    const user = await User.findById(reminder.userId);
+
+    if (!user) {
+      // Handle the case where the user associated with the reminder is not found
+      return;
+    }
+
+    const message = `Hello ${user.name},\n\nIt's time to take your medication: ${reminder.medicationName}.`;
+
+    // Send the email using the sendEmail function
+    await sendWhatsapp({
+      number: user.number,
+      
+      message,
+    });
+
+    // Optionally, update the reminder as "reminded" if needed
+    reminder.isReminded = true;
+    await reminder.save();
+  } catch (error) {
+    console.error('Error sending email notification:', error);
+  }
+};
+
+
+const scheduleWhatsappNotificationsController = async () => {
+  try {
+    // Retrieve reminders that need email notifications
+    const reminders = await Reminder.find({
+      whatsapp: true, // Filter for reminders with email notifications enabled
+      isReminded: false, // Filter for reminders that have not been reminded yet
+    });
+
+    // Schedule email notifications for each reminder
+    for (const reminder of reminders) {
+      const { remindhr, remindmin } = reminder;
+      // Schedule the job
+      schedule.scheduleJob(`${remindmin} ${remindhr} * * *`, async () => {
+        await sendWhatsappNotifications(reminder);
+      });
+    }
+  } catch (error) {
+    console.error('Error scheduling email notifications:', error);
+  }
+};
