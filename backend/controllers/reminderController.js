@@ -293,11 +293,13 @@ exports.reminderlist = async (req, res, next) => {
   try {
     const userId = req.user._id;
 
-    const tasks = await Reminder.find({ user: userId });
+    const Reminderlist = await Reminder.find({ 
+      userId: userId });
 
     res.status(200).json({
       success: true,
-      tasks,
+      Reminderlist,
+      userId,
     });
   } catch (error) {
     next(error);
@@ -305,7 +307,7 @@ exports.reminderlist = async (req, res, next) => {
 };
 exports.deletereminder = async (req, res, next) => {
   try {
-    const task = await Reminder.findById(req.params.id);
+    const reminder = await Reminder.findById(req.params.id);
 
     if (!task) return next(new ErrorHander("Task not found", 404));
     await task.deleteOne();

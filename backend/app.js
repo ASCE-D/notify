@@ -32,8 +32,8 @@ app.use(fileUpload());
 const user = require("./routes/userRoute");
 const reminder = require("./routes/reminderRoute");
 
-app.use("/api/v1", reminder);
-app.use("/api/v1", user);
+app.use("/api/v1/reminder", reminder);
+app.use("/api/v1/users", user);
 
 
 // app.use(express.static(path.join(__dirname, "../frontend/build")));

@@ -7,7 +7,7 @@ const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
 
-router.route("/reminder").post(isAuthenticatedUser, createReminder);
+router.route("/create").post(isAuthenticatedUser, createReminder);
 
 router.route("/deletereminder").post(isAuthenticatedUser, deletereminder);
 router.route("/schedule").post(isAuthenticatedUser, scheduleEmailNotificationsController);

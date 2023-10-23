@@ -1,6 +1,48 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
+import { Link, Navigate } from "react-router-dom";
+import { Context, server } from "../main";
 
 const Login = () => {
+  const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
+  useContext(Context);
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+
+
+const submitHandler = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  try {
+    
+     
+    const { data } = await axios.post(
+      `http://localhost:7000/api/v1/users/login`,
+      {
+        email,
+        password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+
+    toast.success(data.message);
+    setIsAuthenticated(true);
+    setLoading(false);
+  } catch (error) {
+    toast.error(error.response.data.message);
+    setLoading(false);
+    setIsAuthenticated(false);
+  }
+};
+
+if (isAuthenticated) return <Navigate to={"/"} />;
   return (
     <div className=" min-h-screen flex items-center justify-center">
       <div className="bg-green-300 rounded-lg shadow-lg p-6 w-5/6 md:w-3/4 lg:w-2/3 xl:w-1/2">
@@ -27,11 +69,15 @@ const Login = () => {
               it takes less than a minute
             </p>
             <br />
+            <form onSubmit={submitHandler}>
             <div className="mb-4">
               <input
                 type="text"
                 className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
-                placeholder="Username"
+                placeholder="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="mb-6">
@@ -39,8 +85,13 @@ const Login = () => {
                 type="password"
                 className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
                 placeholder="Password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+           </form>
+
             <div className="flex justify-between items-center mb-4">
               <label className="flex items-center space-x-2">
                 <input type="checkbox" checked className="form-checkbox" />
@@ -49,7 +100,7 @@ const Login = () => {
               <p className="text-brown">Forget password?</p>
             </div>
             <div className="text-center">
-              <button className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded w-5/6">
+              <button className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded w-5/6"  type="submit" onClick={submitHandler}>
                 Login
               </button>
             </div>

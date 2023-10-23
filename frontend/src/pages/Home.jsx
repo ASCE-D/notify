@@ -1,12 +1,68 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {
   BiPhoneCall,
   BiLogoWhatsapp,
   BiLogoGmail,
   BiMessage,
 } from "react-icons/bi";
+import { Navigate } from "react-router-dom";
+import { Context, server } from "../main"
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const Home = () => {
+  const [medicationName, setmedicationName] = useState("");
+  const [remindhr, setremindhr] = useState("");
+  const [remindmin, setremindmin] = useState(false);
+  const [email, setEmail] = useState("false");
+  const [refresh, setRefresh] = useState(false)
+  const [loading, setLoading] = useState(false);
+
+  const { isAuthenticated } = useContext(Context);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+  
+    try {
+      console.log( medicationName,
+        remindhr,
+        remindmin,
+        email,)
+      setLoading(true);
+      const { data } = await axios.post(
+        `http://localhost:7000/api/v1/reminder/create`,
+        {
+          medicationName,
+          remindhr,
+          remindmin,
+          email,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(data)
+      // setTitle("");
+      // setDescription("");
+      toast.success(data.message);
+      setLoading(false);
+      // setRefresh((prev) => !prev);
+      console.log("Response Data:", data);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      setLoading(false);
+      console.error("Error:", error);
+    }
+  };
+ 
+  const handleEmailCheckboxChange = (e) => {
+    setEmail(e.target.checked ? "true" : ""); // Set email to "true" when checkbox is checked, empty string otherwise
+  };
+
+  if (!isAuthenticated) return <Navigate to={"/login"} />;
   return (
     <>
       <div className="intrdoction  md:w-4/5 lg:w-3/5 p-8 text-center mx-auto">
@@ -60,15 +116,18 @@ const Home = () => {
                 Set a Reminder
               </h2>
               <br />
-              <form>
+              <form onSubmit={submitHandler}>
                 <div className="mb-4">
                   <label className="block font-bold text-gray-800">
                     Medication name :
                   </label>
                   <input
                     name="medicationname"
+                    value={medicationName}
+                    required
                     type="text"
                     className="w-full border border-gray-300 rounded-md py-2 px-3"
+                    onChange={(e) => setmedicationName(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
@@ -77,19 +136,25 @@ const Home = () => {
                   </label>
                   <div className="flex items-center">
                     <input
-                      name="remindehr"
+                      name="remindhr"
                       type="number"
                       min="0"
                       max="23"
                       className="w-1/2 border border-gray-300 rounded-md py-2 px-3"
+                      value={remindhr}
+                      required
+                      onChange={(e) => setremindhr(e.target.value)}
                     />
                     <span className="mx-2">:</span>
                     <input
-                      name="remindemin"
+                      name="remindmin"
                       type="number"
                       min="0"
                       max="59"
                       className="w-1/2 border border-gray-300 rounded-md py-2 px-3"
+                      required
+                      value={remindmin}
+                      onChange={(e) => setremindmin(e.target.value)}
                     />
                   </div>
                   <br />
@@ -107,9 +172,11 @@ const Home = () => {
                       </label>
 
                       <label className="flex items-center">
-                        <input type="checkbox" name="gmail" />
+                        <input type="checkbox" name="mail"
+                        checked={email === "true"} // Bind the checked status of the checkbox to the email state
+                        onChange={handleEmailCheckboxChange} />
                         <span className="ml-2 text-lg">
-                          <BiLogoGmail className=" inline text-3xl text-gray-600" /> Gmail
+                          <BiLogoGmail className=" inline text-3xl text-gray-600" /> mail
                         </span>
                       </label>
                       </div>
@@ -135,7 +202,7 @@ const Home = () => {
                 <button
                   type="submit"
                   className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 w-full"
-                >
+                onClick={submitHandler}>
                   Submit
                 </button>
               </form>
