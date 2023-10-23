@@ -12,19 +12,15 @@ import axios from "axios";
 import Loading from "../components/Loading";
 
 const Home = () => {
-  const [medicationName, setmedicationName] = useState("");
-  const [remindhr, setremindhr] = useState("");
-  const [remindmin, setremindmin] = useState(false);
+  const [medicationName, setMedicationName] = useState("");
+  const [remindhr, setRemindhr] = useState("");
+  const [remindmin, setRemindmin] = useState("false");
   const [email, setEmail] = useState("false");
-<<<<<<< HEAD
-  const [whatsapp, setWhatsapp] = useState("false");
-  // const [email, setEmail] = useState("false");
-  // const [email, setEmail] = useState("false");
 
-=======
-  const [whatsapp, setwhatsapp] = useState("false");
+  const [whatsapp, setWhatsapp] = useState("false");
+   // const [email, setEmail] = useState("false");
+  // const [email, setEmail] = useState("false");
   // const [refresh, setRefresh] = useState("false");
->>>>>>> 8dc9aad9dad74e50205c0d0df7e87d20e6061dab
 
   const { isAuthenticated , loading , setLoading } = useContext(Context);
 
@@ -56,9 +52,9 @@ const Home = () => {
 
       console.log("Response Data:", data);
 
-      setmedicationName("");
-      setremindhr("");
-      setremindmin("");
+      setMedicationName("");
+      setRemindhr("");
+      setRemindmin("");
       setEmail("false");
       setWhatsapp("false");
     } catch (error) {
@@ -69,15 +65,10 @@ const Home = () => {
   };
 
   const handleEmailCheckboxChange = (e) => {
-    setEmail(e.target.checked ? "true" : "false"); // Set email to "true" when checkbox is checked, empty string otherwise
+    setEmail(e.target.checked ? "true" : "false"); 
   };
-<<<<<<< HEAD
-  const handleWhatsappCheckboxChange = (e) => {
-    setWhatsapp(e.target.checked ? "true" : "false"); 
-=======
   const handlewhatsappCheckboxChange = (e) => {
-    setwhatsapp(e.target.checked ? "true" : "false"); // Set email to "true" when checkbox is checked, empty string otherwise
->>>>>>> 8dc9aad9dad74e50205c0d0df7e87d20e6061dab
+    setWhatsapp(e.target.checked ? "true" : "false"); 
   };
 
   if (!isAuthenticated) return <Navigate to={"/login"} />;
@@ -151,7 +142,7 @@ const Home = () => {
                     required
                     type="text"
                     className="w-full border border-gray-300 rounded-md py-2 px-3"
-                    onChange={(e) => setmedicationName(e.target.value)}
+                    onChange={(e) => setMedicationName(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
@@ -167,7 +158,7 @@ const Home = () => {
                       className="w-1/2 border border-gray-300 rounded-md py-2 px-3"
                       value={remindhr}
                       required
-                      // onChange={(e) => setremindhr(e.target.value)}
+                      // onChange={(e) => setRemindhr(e.target.value)}
                       onInput={(e) => {
                         const value = e.target.value;
                         const intValue = parseInt(value, 10);
@@ -176,7 +167,7 @@ const Home = () => {
                         } else if (intValue > 23) {
                           e.target.value = '23';
                         }
-                        setremindhr(e.target.value);
+                        setRemindhr(e.target.value);
                       }}
                       placeholder="24hr format"
                     />
@@ -189,7 +180,7 @@ const Home = () => {
                       className="w-1/2 border border-gray-300 rounded-md py-2 px-3"
                       required
                       value={remindmin}
-                      // onChange={(e) => setremindmin(e.target.value)}
+                      // onChange={(e) => setRemindmin(e.target.value)}
                       onInput={(e) => {
                         const value = e.target.value;
                         const intValue = parseInt(value, 10);
@@ -198,7 +189,7 @@ const Home = () => {
                         } else if (intValue > 59) {
                           e.target.value = '59';
                         }
-                        setremindmin(e.target.value);
+                        setRemindmin(e.target.value);
                       }}
                       placeholder='60min format'
                     />
@@ -212,13 +203,9 @@ const Home = () => {
                       <div className="flex items-center justify-between">
                         <label className="flex items-center ">
                           <input type="checkbox" name="whatsapp" 
-<<<<<<< HEAD
-                          checked={whatsapp === "true"} // Bind the checked status of the checkbox to the email state
-                          onChange={handleWhatsappCheckboxChange}/>
-=======
                            checked={whatsapp === "true"} // Bind the checked status of the checkbox to the email state
                            onChange={handlewhatsappCheckboxChange}/>
->>>>>>> 8dc9aad9dad74e50205c0d0df7e87d20e6061dab
+
                           <span className="ml-2 text-lg">
                             <BiLogoWhatsapp className=" inline text-3xl text-gray-600" />
                             WhatsApp
