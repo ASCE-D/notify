@@ -16,6 +16,7 @@ const Home = () => {
   const [remindhr, setremindhr] = useState("");
   const [remindmin, setremindmin] = useState(false);
   const [email, setEmail] = useState("false");
+  const [whatsapp, setwhatsapp] = useState("false");
   // const [refresh, setRefresh] = useState("false");
 
   const { isAuthenticated , loading , setLoading } = useContext(Context);
@@ -33,6 +34,7 @@ const Home = () => {
           remindhr,
           remindmin,
           email,
+          whatsapp,
         },
         {
           withCredentials: true,
@@ -59,7 +61,10 @@ const Home = () => {
   };
 
   const handleEmailCheckboxChange = (e) => {
-    setEmail(e.target.checked ? "true" : ""); // Set email to "true" when checkbox is checked, empty string otherwise
+    setEmail(e.target.checked ? "true" : "false"); // Set email to "true" when checkbox is checked, empty string otherwise
+  };
+  const handlewhatsappCheckboxChange = (e) => {
+    setwhatsapp(e.target.checked ? "true" : "false"); // Set email to "true" when checkbox is checked, empty string otherwise
   };
 
   if (!isAuthenticated) return <Navigate to={"/login"} />;
@@ -193,7 +198,9 @@ const Home = () => {
                     <div className="w-4/5 mx-auto">
                       <div className="flex items-center justify-between">
                         <label className="flex items-center ">
-                          <input type="checkbox" name="whatsapp" />
+                          <input type="checkbox" name="whatsapp" 
+                           checked={whatsapp === "true"} // Bind the checked status of the checkbox to the email state
+                           onChange={handlewhatsappCheckboxChange}/>
                           <span className="ml-2 text-lg">
                             <BiLogoWhatsapp className=" inline text-3xl text-gray-600" />
                             WhatsApp
