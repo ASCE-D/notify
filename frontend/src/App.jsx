@@ -12,7 +12,7 @@ import { Toaster } from "react-hot-toast";
 import { useContext, useEffect } from "react";
 
 function App() {
-  const { setUser, setIsAuthenticated, setLoading } = useContext(Context);
+  const { setUser, setIsAuthenticated, setLoading , isAuthenticated } = useContext(Context);
 
   useEffect(() => {
     setLoading(true);
@@ -26,6 +26,11 @@ function App() {
         setLoading(false);
       })
       .catch((error) => {
+        if (error.response.status === 401) {
+          null; 
+        } else {
+          console.error(error); // Log other errors
+        }
         setUser({});
         setIsAuthenticated(false);
         setLoading(false);
@@ -34,7 +39,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar /> 
+        { isAuthenticated ? (<Navbar /> ) : (null) }
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path="/login" element={<Login />} /> 

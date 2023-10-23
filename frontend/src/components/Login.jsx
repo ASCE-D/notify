@@ -5,7 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 import { Context, server } from "../main";
 
 const Login = () => {
-  const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
+  const { isAuthenticated, setIsAuthenticated,  setLoading } =
   useContext(Context);
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
@@ -61,7 +61,7 @@ if (isAuthenticated) return <Navigate to={"/"} />;
             <p>
               Don't have an account? <br />
               <a
-                href="#"
+                href="/signup"
                 className="underline decoration-sky-500 text-cyan-700"
               >
                 Create Your Account
@@ -74,7 +74,7 @@ if (isAuthenticated) return <Navigate to={"/"} />;
               <input
                 type="text"
                 className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
-                placeholder="email"
+                placeholder="Email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

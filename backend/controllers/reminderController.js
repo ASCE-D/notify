@@ -309,8 +309,8 @@ exports.deletereminder = async (req, res, next) => {
   try {
     const reminder = await Reminder.findById(req.params.id);
 
-    if (!task) return next(new ErrorHander("Task not found", 404));
-    await task.deleteOne();
+    if (!reminder) return next(new ErrorHander("Task not found", 404));
+    await reminder.deleteOne();
 
     res.status(200).json({
       message: "Task Deleted!",

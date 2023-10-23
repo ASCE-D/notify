@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { GiHamburgerMenu, GiCrossMark } from "react-icons/gi";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/navbar.css";
+import { server, Context } from "../main";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const { setIsAuthenticated, setLoading } = useContext(Context);
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,6 +26,23 @@ const Navbar = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const logoutHandler = async () => {
+    setLoading(true);
+    try {
+      await axios.get(`${server}/users/logout`, {
+        withCredentials: true,
+      });
+
+      toast.success("Logged Out Successfully");
+      setIsAuthenticated(false);
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      setIsAuthenticated(true);
+      setLoading(false);
+    }
+  };
 
   const menuVariants = {
     hidden: {
@@ -51,6 +72,12 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/reminders">Reminders</NavLink>
             <NavLink to="/contact">Contact</NavLink>
+            <button
+  onClick={() => logoutHandler()}
+  className="bg-transparent border border-green-800 hover:bg-green-500 hover:text-grey text-grey-100 font-semibold py-1 px-3 rounded-full shadow-xl"
+>
+  Logout
+</button>
           </div>
 
           <div className="hamburger-menu">
@@ -73,6 +100,12 @@ const Navbar = () => {
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/reminders">Reminders</NavLink>
                 <NavLink to="/contact">Contact</NavLink>
+                <button
+                  className="mx-auto block font-semibold"
+                  onClick={() => logoutHandler()}
+                >
+                  Logout
+                </button>
               </motion.div>
             )}
           </AnimatePresence>
