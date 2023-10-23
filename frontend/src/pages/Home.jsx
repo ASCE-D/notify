@@ -71,6 +71,7 @@ const Home = () => {
       <div className="intrdoction  md:w-4/5 lg:w-3/5 p-8 text-center mx-auto">
         <br />
         <br />
+        <br />
         <h1 className="text-4xl md:text-5xl text-gray-800 font-bold mb-4">
           Welcome to Notify
         </h1> <br />

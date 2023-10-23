@@ -18,13 +18,14 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     //   });
     // }
 
-    const { name, email, password } = req.body;
+    const { name, email, password,number } = req.body;
     // const public_id = myCloud && myCloud.public_id ? myCloud.public_id : "";
     // const url = myCloud && myCloud.secure_url ? myCloud.secure_url : "";
     const user = await User.create({
       name,
       email,
       password,
+      number,
       // avatar: {
       //   public_id: public_id,
       //   url: url,
@@ -88,15 +89,14 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/users/password/reset/${resetToken}`;
-  const resetPasswordUrl = `http://localhost:5173/reset/${resetToken}`; //manually type the frontend protocol and host name 
-  
+  const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
+
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
 
   try {
     await sendEmail({
       email: user.email,
-      subject: `Notify Password Recovery`,
+      subject: `Ecommerce Password Recovery`,
       message,
     });
 
@@ -146,7 +146,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
   await user.save();
 
-  sendToken(user, "Password Reset Done" ,200, res);
+  sendToken(user, 200, res);
 });
 
 // Get User Detail

@@ -3,7 +3,7 @@ import { Context } from '../main';
 import Loading from '../components/Loading';
 import { Navigate } from 'react-router-dom';
 import { FaLinkedin, FaInstagram, FaTwitter, FaEnvelope } from 'react-icons/fa';
-import '../styles/Contact.css';
+import '../styles/contact.css';
 
 const Contact = () => {
   const { isAuthenticated, loading } = useContext(Context);
