@@ -3,10 +3,9 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { Context, server } from "../main";
 import toast from "react-hot-toast";
-
+import { NavLink } from "react-router-dom";
 
 const SignUp = () => {
- 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
@@ -18,7 +17,6 @@ const SignUp = () => {
     setLoading(true);
     e.preventDefault();
     try {
-     
       const { data } = await axios.post(
         `${server}/users/register`,
         {
@@ -52,80 +50,85 @@ const SignUp = () => {
         <div className="md:flex">
           <div className="md:w-1/2 p-6">
             <h1 className="text-6xl font-bold text-green mb-4">Notify</h1>
-            <p className="text-white">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Crabitur et est sed felis aliquet sollicitudin.
+            <br />
+            <p className="text-gray text-lg">
+              Say goodbye to missed doses and hello to a healthier, happier you.
+              Welcome to Notify
             </p>
           </div>
-         
+
           <div className="md:w-1/2 p-6">
             <h5 className="text-4xl text-center font-bold">Sign Up</h5>
             <br />
             <form onSubmit={submitHandler}>
-            <div className="mb-4">
-              <input
-                type="text"
-                className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
-                placeholder="Username"
-                value={name}
-                required
-                onChange={e => setName(e.target.value)}
-              />
-            </div>
-            
-            <div className="mb-4">
-              <input
-                type="text"
-                className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
-                placeholder="Email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="mb-4">
-              <input
-                type="text"
-                className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
-                placeholder="Mobile Number"
-                value={number}
-                required
-                onChange={e => setNumber(e.target.value)}
-              />
-            </div>
-            <div className="mb-4">
-              <input
-                type="password"
-                className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
-                placeholder="Password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+              <div className="mb-4">
+                <input
+                  type="text"
+                  className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
+                  placeholder="Username"
+                  value={name}
+                  required
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
 
-              />
-            </div>
-           
-          
-            <div className="flex justify-between items-center mb-4">
-              <label className="flex items-center space-x-2">
-                
-              <p className='text-right'> {/* Align the link to the right */}
-              Have an account? 
-            </p>
-              </label>
-              <a
-                href="/login"
-                className="underline decoration-sky-500 text-cyan-700"
-              >
-                Login to Your Account
-              </a>
-            </div>
-            <br />
-            <div className="text-center">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-5/6"  disabled={loading} type="submit" >
-                Sign Up
-              </button>
-            </div>
-            <br />
+              <div className="mb-4">
+                <input
+                  type="text"
+                  className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
+                  placeholder="Email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
+                  placeholder="Mobile Number"
+                  value={number}
+                  required
+                  onChange={(e) => setNumber(e.target.value)}
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  className="w-full p-2 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500 rounded-xl"
+                  placeholder="Password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              <div className="flex justify-between items-center mb-4">
+                <label className="flex items-center space-x-2">
+                  <p className="text-right">
+                    {" "}
+                    {/* Align the link to the right */}
+                    Have an account?
+                  </p>
+                </label>
+                <NavLink
+                  to="/login"
+                  className="underline decoration-sky-500 text-cyan-700"
+                >
+                  Login to Your Account
+                </NavLink>
+              </div>
+              <br />
+              <div className="text-center">
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-5/6"
+                  disabled={loading}
+                  type="submit"
+                >
+                  Sign Up
+                </button>
+              </div>
+              <br />
             </form>
           </div>
         </div>
