@@ -77,10 +77,8 @@ const Home = () => {
   ) : (
     <>
       <div className="intrdoction py-12 md:w-4/5 lg:w-4/6 p-8 text-center mx-auto">
-        <br />
-        <br />
-        <br />
-        <h1 className="text-4xl md:text-5xl text-gray-800 font-bold mb-4">
+
+        <h1 className="text-4xl md:text-5xl text-gray-800 font-bold mb-5 mt-20 ">
           Welcome to Notify
         </h1>{" "}
         <br />
@@ -197,7 +195,7 @@ const Home = () => {
                     <label className="block font-bold text-gray-800 mb-2">
                       Notification Method :
                     </label>
-                    <div className="w-4/5 mx-auto">
+                    <div className=" sm:w-4/5 md:w-full lg:w-4/5 mx-auto">
                       <div className="flex items-center justify-between">
                         <label className="flex items-center ">
                           <input
@@ -222,7 +220,7 @@ const Home = () => {
                           />
                           <span className="ml-2 text-lg">
                             <BiLogoGmail className=" inline text-3xl text-gray-600" />{" "}
-                            Mail
+                            Mail&nbsp;&nbsp;&nbsp;
                           </span>
                         </label>
                       </div>
