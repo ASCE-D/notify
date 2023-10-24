@@ -18,11 +18,11 @@ const Home = () => {
   const [email, setEmail] = useState("false");
 
   const [whatsapp, setWhatsapp] = useState("false");
-   // const [email, setEmail] = useState("false");
+  // const [email, setEmail] = useState("false");
   // const [email, setEmail] = useState("false");
   // const [refresh, setRefresh] = useState("false");
 
-  const { isAuthenticated , loading , setLoading } = useContext(Context);
+  const { isAuthenticated, loading, setLoading } = useContext(Context);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -65,25 +65,23 @@ const Home = () => {
   };
 
   const handleEmailCheckboxChange = (e) => {
-    setEmail(e.target.checked ? "true" : "false"); 
+    setEmail(e.target.checked ? "true" : "false");
   };
   const handlewhatsappCheckboxChange = (e) => {
-    setWhatsapp(e.target.checked ? "true" : "false"); 
+    setWhatsapp(e.target.checked ? "true" : "false");
   };
 
   if (!isAuthenticated) return <Navigate to={"/login"} />;
-  return (
-    loading ? (
-      <Loading />
-    ) : (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
-      <div className="intrdoction  md:w-4/5 lg:w-3/5 p-8 text-center mx-auto">
-        <br />
-        <br />
-        <br />
-        <h1 className="text-4xl md:text-5xl text-gray-800 font-bold mb-4">
+      <div className="intrdoction py-12 md:w-4/5 lg:w-4/6 p-8 text-center mx-auto">
+
+        <h1 className="text-4xl md:text-5xl text-gray-800 font-bold mb-5 mt-20 ">
           Welcome to Notify
-        </h1> <br />
+        </h1>{" "}
+        <br />
         <p className="text-lg text-gray-600 leading-7">
           At Notify, we believe that taking control of your health should be
           simple and stress-free. We understand that managing medications can be
@@ -105,9 +103,9 @@ const Home = () => {
       </div>
 
       <div className="min-h-screen flex items-center justify-center">
-        <div className="max-w-screen-xl mx-auto p-4">
+        <div className="max-w-screen-xl mx-auto p-12">
           <div className="md:flex justify-center">
-            <div className="md:mr-7 text-center md:w-1/2 md:p-4 mb-4">
+            <div className="md:mr-7 text-center md:w-2/3 md:p-4 mb-16">
               <h1 className="text-4xl md:text-5xl text-gray-800 font-bold">
                 Did you know?
               </h1>{" "}
@@ -123,10 +121,8 @@ const Home = () => {
                 than those who didn't use these apps.
               </p>
             </div>
-            <br />
-            <br />
-            <br />
-            <div className=" md:ml-7 bg-green-300 rounded-lg p-7 shadow-md w-full md:w-1/2 mb-4">
+            
+            <div className=" md:ml-7 bg-green-300 rounded-lg p-7 shadow-md w-full md:w-1/2 mb-16">
               <h2 className="text-3xl md:text-4xl text-center text-gray-800 font-bold">
                 Set a Reminder
               </h2>
@@ -163,9 +159,9 @@ const Home = () => {
                         const value = e.target.value;
                         const intValue = parseInt(value, 10);
                         if (isNaN(intValue) || intValue < 0) {
-                          e.target.value = '';
+                          e.target.value = "";
                         } else if (intValue > 23) {
-                          e.target.value = '23';
+                          e.target.value = "23";
                         }
                         setRemindhr(e.target.value);
                       }}
@@ -185,13 +181,13 @@ const Home = () => {
                         const value = e.target.value;
                         const intValue = parseInt(value, 10);
                         if (isNaN(intValue) || intValue < 0) {
-                          e.target.value = '';
+                          e.target.value = "";
                         } else if (intValue > 59) {
-                          e.target.value = '59';
+                          e.target.value = "59";
                         }
                         setRemindmin(e.target.value);
                       }}
-                      placeholder='60min format'
+                      placeholder="60min format"
                     />
                   </div>
                   <br />
@@ -199,12 +195,15 @@ const Home = () => {
                     <label className="block font-bold text-gray-800 mb-2">
                       Notification Method :
                     </label>
-                    <div className="w-4/5 mx-auto">
+                    <div className=" sm:w-4/5 md:w-full lg:w-4/5 mx-auto">
                       <div className="flex items-center justify-between">
                         <label className="flex items-center ">
-                          <input type="checkbox" name="whatsapp" 
-                           checked={whatsapp === "true"} // Bind the checked status of the checkbox to the email state
-                           onChange={handlewhatsappCheckboxChange}/>
+                          <input
+                            type="checkbox"
+                            name="whatsapp"
+                            checked={whatsapp === "true"} // Bind the checked status of the checkbox to the email state
+                            onChange={handlewhatsappCheckboxChange}
+                          />
 
                           <span className="ml-2 text-lg">
                             <BiLogoWhatsapp className=" inline text-3xl text-gray-600" />
@@ -221,7 +220,7 @@ const Home = () => {
                           />
                           <span className="ml-2 text-lg">
                             <BiLogoGmail className=" inline text-3xl text-gray-600" />{" "}
-                            Mail
+                            Mail&nbsp;&nbsp;&nbsp;
                           </span>
                         </label>
                       </div>
@@ -254,14 +253,29 @@ const Home = () => {
                 </button>
               </form>
             </div>
+            {/* <br />
             <br />
-            <br />
-            <br />
+            <br /> */}
+          </div>
+          <div className="mt-8 text-center  pb-7">
+            <h1 className="text-2xl md:text-3xl text-gray-800 font-bold">
+              Note: To enable WhatsApp
+            </h1>
+            <p className="text-gray-600">Please scan the given QR code and hit the send button</p>
+            <img
+              src="/qr code.PNG"
+              alt="QR code"
+              className="h-32 mx-auto mt-2"
+            />
+            <p className="text-gray-600">
+              Or, on WhatsApp, text "join plate-charge" to the number
+              +14155238886
+            </p>
           </div>
         </div>
       </div>
     </>
-  ));
+  );
 };
 
 export default Home;

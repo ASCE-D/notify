@@ -10,6 +10,7 @@ import {
   BiLogoGmail,
   BiMessage,
 } from "react-icons/bi";
+import NoRemindersMessage from "../components/NoRemindersMessage";
 
 const Reminders = () => {
   const [reminders, setReminders] = useState([]);
@@ -55,69 +56,73 @@ const Reminders = () => {
       <h1 className="text-center m-12 text-3xl md:text-4xl lg:text-5xl font-bold">
         Your Reminder List
       </h1>
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse border border-green-500">
-          <thead>
-            <tr>
-              <th className="border bg-green-200 text-center py-2 px-4">
-                Medication Name
-              </th>
-              <th className="border bg-green-200 text-center py-2 px-4">
-                Time (24hr : 60min)
-              </th>
-              <th className="border bg-green-200 text-center py-2 px-4">
-                Notification Methods
-              </th>
-              <th className="border bg-green-200 text-center py-2 px-4">
-                Delete Reminder
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {reminders.map((reminder) => (
-              <tr key={reminder._id}>
-                <td className="border py-2 px-4 text-center">
-                  {reminder.medicationName}
-                </td>
-                <td className="border py-2 px-4 text-center">{`${reminder.remindhr }${' '}:${' '}${ reminder.remindmin}`}</td>
-                <td className="border py-2 md:px-6 lg:px-8 text-center">
-                  <div className="flex items-center justify-between">
-                    {reminder.whatsapp ? (
-                      <BiLogoWhatsapp className="text-green-700 text-lg sm:text-xl md:text-2xl" />
-                    ) : (
-                      <BiLogoWhatsapp className="text-gray-400 text-lg sm:text-xl md:text-2xl" />
-                    )}
-                    {reminder.phone ? (
-                      <BiPhoneCall className="text-green-700 text-lg sm:text-xl md:text-2xl" />
-                    ) : (
-                      <BiPhoneCall className="text-gray-400 text-lg sm:text-xl md:text-2xl" />
-                    )}
-                    {reminder.email ? (
-                      <BiLogoGmail className="text-green-700 text-lg sm:text-xl md:text-2xl" />
-                    ) : (
-                      <BiLogoGmail className="text-gray-400 text-lg sm:text-xl md:text-2xl" />
-                    )}
-                    {reminder.message ? (
-                      <BiMessage className="text-green-700 text-lg sm:text-xl md:text-2xl" />
-                    ) : (
-                      <BiMessage className="text-gray-400 text-lg sm:text-xl md:text-2xl" />
-                    )}
-                  </div>
-                </td>
-                <td className="border py-2 px-4 text-center">
-                  <button
-                    onClick={() => deleteReminder(reminder._id)}
-                    className = "bg-transparent border border-red-900 hover:bg-red-300  text-grey-100 font-semibold py-0 px-2 rounded-md"
-                    // className="bg-red-500 hover:bg-red-600 text-white rounded-md transition duration-300 px-2"
-                  >
-                    Delete
-                  </button>
-                </td>
+      {reminders.length === 0 ? (
+        <NoRemindersMessage />
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse border border-green-500">
+            <thead>
+              <tr>
+                <th className="border bg-green-200 text-center py-2 px-4">
+                  Medication Name
+                </th>
+                <th className="border bg-green-200 text-center py-2 px-4">
+                  Time (24hr : 60min)
+                </th>
+                <th className="border bg-green-200 text-center py-2 px-4">
+                  Notification Methods
+                </th>
+                <th className="border bg-green-200 text-center py-2 px-4">
+                  Delete Reminder
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {reminders.map((reminder) => (
+                <tr key={reminder._id}>
+                  <td className="border py-2 px-4 text-center">
+                    {reminder.medicationName}
+                  </td>
+                  <td className="border py-2 px-4 text-center">{`${reminder.remindhr }${' '}:${' '}${ reminder.remindmin}`}</td>
+                  <td className="border py-2 md:px-6 lg:px-8 text-center">
+                    <div className="flex items-center justify-between">
+                      {reminder.whatsapp ? (
+                        <BiLogoWhatsapp className="text-green-700 text-lg sm:text-xl md:text-2xl" />
+                      ) : (
+                        <BiLogoWhatsapp className="text-gray-400 text-lg sm:text-xl md:text-2xl" />
+                      )}
+                      {reminder.phone ? (
+                        <BiPhoneCall className="text-green-700 text-lg sm:text-xl md:text-2xl" />
+                      ) : (
+                        <BiPhoneCall className="text-gray-400 text-lg sm:text-xl md:text-2xl" />
+                      )}
+                      {reminder.email ? (
+                        <BiLogoGmail className="text-green-700 text-lg sm:text-xl md:text-2xl" />
+                      ) : (
+                        <BiLogoGmail className="text-gray-400 text-lg sm:text-xl md:text-2xl" />
+                      )}
+                      {reminder.message ? (
+                        <BiMessage className="text-green-700 text-lg sm:text-xl md:text-2xl" />
+                      ) : (
+                        <BiMessage className="text-gray-400 text-lg sm:text-xl md:text-2xl" />
+                      )}
+                    </div>
+                  </td>
+                  <td className="border py-2 px-4 text-center">
+                    <button
+                      onClick={() => deleteReminder(reminder._id)}
+                      className = "bg-transparent border border-red-900 hover:bg-red-300  text-grey-100 font-semibold py-0 px-2 rounded-md"
+                      // className="bg-red-500 hover:bg-red-600 text-white rounded-md transition duration-300 px-2"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
