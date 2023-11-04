@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './styles/index.css'
 import { createContext } from "react";
+import { ChakraProvider } from '@chakra-ui/react'
+
+
+
+
 
 export const server = "http://localhost:7000/api/v1";
 
@@ -28,7 +33,14 @@ const AppWrapper = () => {
 };
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+ 
   <React.StrictMode>
-     <AppWrapper/>
-  </React.StrictMode>,
+  
+    <ChakraProvider > 
+    
+      <AppWrapper/>
+    </ChakraProvider>
+    
+  </React.StrictMode>
+ ,
 )

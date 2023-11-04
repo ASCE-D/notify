@@ -6,6 +6,7 @@ import "../styles/navbar.css";
 import { server, Context } from "../main";
 import toast from "react-hot-toast";
 import axios from "axios";
+import DarkModeButton from "../Darkreadersetup";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -78,6 +79,7 @@ const Navbar = () => {
             >
               Logout
             </button>
+            <DarkModeButton/>
           </div>
 
           <div className="hamburger-menu">
@@ -106,6 +108,7 @@ const Navbar = () => {
                 >
                   Logout
                 </button>
+              
               </motion.div>
             )}
           </AnimatePresence>
@@ -118,3 +121,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
