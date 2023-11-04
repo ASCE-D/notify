@@ -83,22 +83,8 @@ const Home = () => {
         </h1>{" "}
         <br />
         <p className="text-lg text-gray-600 leading-7">
-          At Notify, we believe that taking control of your health should be
-          simple and stress-free. We understand that managing medications can be
-          a challenging task, especially when life gets busy. That's why we're
-          here to make your health journey more manageable, one pill at a time.
-          Our mission is clear: to empower you to stay on top of your medication
-          regimen and improve your overall well-being. We offer a user-friendly
-          platform designed to remind you when to take your medications,
-          ensuring that you never miss a dose. Here, you'll find a range of
-          tools and features to help you organize and track your medications,
-          set personalized reminders, and gain insights into your adherence. Our
-          goal is to make medication management effortless and reliable, so you
-          can focus on what matters most—your health and peace of mind. Join us
-          on this journey toward better health and medication adherence. Say
-          goodbye to missed doses and hello to a healthier, happier you. Welcome
-          to Notify, where we're committed to simplifying your health
-          management.
+          At Notify, we believe that taking control of your tiime should be
+          simple and stress-free. Getting a reminder notification plays a vital role in our busy lives. In today's fast-paced world, where we juggle multiple tasks and responsibilities, it's easy for things to slip through the cracks. A reminder notification acts as a gentle nudge, ensuring that we stay on top of our commitments. Whether it's a project deadline, a doctor's appointment, or even a simple daily task, these reminders help us prioritize and stay organized. They provide us with a sense of control and prevent important events from being forgotten. 
         </p>
       </div>
 
@@ -111,14 +97,7 @@ const Home = () => {
               </h1>{" "}
               <br />
               <p className="text-lg text-gray-600 leading-7">
-                A 2017 study found that adults were much more likely to take
-                their medication, and to take it on time, after receiving daily
-                text message reminders. Over 2 weeks, the percentage of people
-                who forgot their medications dropped from 46% to 5%. The
-                percentage who had medication delays dropped from 85% to 18%.
-                Another study in 2019 found that patients using medication
-                reminder apps have better medication adherence after 3 months
-                than those who didn't use these apps.
+              reminder notifications help reduce stress and anxiety by freeing up mental space and allowing us to focus on other important aspects of our live
               </p>
             </div>
             
@@ -225,7 +204,7 @@ const Home = () => {
                         </label>
                       </div>
                       <div className="flex items-center justify-between">
-                        <label className="flex items-center">
+                        {/* <label className="flex items-center">
                           <input type="checkbox" name="sms" />
                           <span className="ml-2 text-lg">
                             <BiMessage className=" inline text-3xl text-gray-600" />{" "}
@@ -239,7 +218,7 @@ const Home = () => {
                             <BiPhoneCall className=" inline text-3xl text-gray-600" />{" "}
                             Phone
                           </span>
-                        </label>
+                        </label> */}
                       </div>
                     </div>
                   </div>
